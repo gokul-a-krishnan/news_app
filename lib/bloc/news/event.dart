@@ -1,9 +1,9 @@
 abstract class NewsEvent {}
 
 class SearchEvent extends NewsEvent {
-  final String search;
+  final String title;
 
-  SearchEvent(this.search);
+  SearchEvent(this.title);
 }
 
 class RecentEvent extends NewsEvent {}

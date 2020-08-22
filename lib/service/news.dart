@@ -6,21 +6,21 @@ class NewsService {
   final String _baseUrl = 'https://newsapi.org/v2';
   Dio _dio = Dio();
 
-  getHeadLines() async {
+  Future<List<News>> getHeadLines() async {
     _dio.options = BaseOptions(baseUrl: _baseUrl);
     Response res = await _dio.get('/top-headlines',
         queryParameters: {'apiKey': _apiKey, 'country': 'in'});
     return _transform(res.data);
   }
 
-  getNews(String title) async {
+  Future<List<News>> getNews(String title) async {
     _dio.options = BaseOptions(baseUrl: _baseUrl);
     Response res = await _dio
         .get('/everything', queryParameters: {'apiKey': _apiKey, 'q': title});
     return _transform(res.data);
   }
 
-  _transform(res) {
+  List<News> _transform(res) {
     List articles = res['articles'];
     List<News> news = List<News>();
     articles.forEach((article) {
